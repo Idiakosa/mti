@@ -4,24 +4,25 @@ import matplotlib.pyplot as plt
 # Loading Data
 data = pd.read_csv(r"C:\Users\kosa3\mti\toxicity_analysis\toxicophore_merged.csv")
 
-# Filter for ligands with 0 to 2 toxicophores
+# Filter for compounds/molecules with 0 to 2 toxicophores
 filtered = data[(data['Toxicophore'] >= 0) & (data['Toxicophore'] <= 2)]
 
 # Save the filtered data
 filtered.to_csv("Filtered_Toxicity.csv", index=False)
 
-# Check if any ligands passed
+# Check if any molecules passed
 if filtered.empty:
-    print("No ligands passed the toxicophore filter (0–2).")
+    print("No molecules passed the toxicophore filter (0–2).")
 else:
-    print(f"{len(filtered)} ligands passed the toxicophore filter.")
+    print(f"{len(filtered)} molecules passed the toxicophore filter.")
     
     # Plot the results
     plt.figure(figsize=(10, 6))
     plt.bar(filtered.index, filtered['Toxicophore'], color='red')
-    plt.xlabel("Ligands (Row Index)")
+    plt.xlabel("Molecule(Row Index)")
     plt.ylabel("# of Toxicophores")
-    plt.title("Ligands with Toxicophores Between 0 and 2")
+    plt.title("Molecules with Toxicophores Between 0 and 2")
+    plt.yticks([0, 1, 2])
 
     # Add value labels on top of each bar
     for i, val in enumerate(filtered['Toxicophore']):
